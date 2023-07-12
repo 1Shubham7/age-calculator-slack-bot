@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
-
+	"strconv"
 	"github.com/shomali11/slacker"
 	"golang.org/x/tools/go/analysis"
 )
@@ -29,6 +29,21 @@ func main() {
 
 	go printCommandEvents(bot.CommandEvents())
 
+
+	bot.Command("my yob is <year>", &slacker.CommandDefinition){
+		Description: "yob calculator",
+		Example: "my yob is 2020",
+		Handler: func(botCtx slacker.BotContext, request slacker.Request, response slacker.ResponseWriter ){
+			rear := request.Param("year")
+
+		}
+	}
+
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
+
+	err := bot.Listen(ctx)
+	if err != nil{
+		log.Fatal(err)
+	}
 }
